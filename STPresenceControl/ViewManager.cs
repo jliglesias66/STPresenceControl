@@ -41,40 +41,39 @@ namespace STPresenceControl
                   },
                    Dispatcher.CurrentDispatcher);
 
-            _refreshData = new DispatcherTimer(new TimeSpan(0, 30, 0), DispatcherPriority.Normal, (sender, e) => GetPrensenceControlEntries() , Dispatcher.CurrentDispatcher);
+            _refreshData = new DispatcherTimer(new TimeSpan(0, 30, 0), DispatcherPriority.Normal, (sender, e) => GetPrensenceControlEntries(), Dispatcher.CurrentDispatcher);
 
             GetPrensenceControlEntries();
-    }
+        }
 
-    private void GetPrensenceControlEntries()
-    {
-        Task.Run(async () =>
+        private void GetPrensenceControlEntries()
         {
-            await _dataProvider.LoginAsync(ConfigurationManager.AppSettings[App.CN_UserName], ConfigurationManager.AppSettings[App.CN_Pwd]);
-            _presenceControlEntries = await _dataProvider.GetPrensenceControlEntriesAsync(DateTime.Today);
-            _leftMins = PresenceControlEntriesHelper.GetLeftTimeMinutes(_presenceControlEntries);
-            RefreshNotifyIcon();
+            Task.Run(async () =>
+            {
+                await _dataProvider.LoginAsync(ConfigurationManager.AppSettings[App.CN_UserName], ConfigurationManager.AppSettings[App.CN_Pwd]);
+                _presenceControlEntries = await _dataProvider.GetPrensenceControlEntriesAsync(DateTime.Today);
+                _leftMins = PresenceControlEntriesHelper.GetLeftTimeMinutes(_presenceControlEntries);
+                RefreshNotifyIcon();
 #if DEBUG
                 _notification.Show("Actualizas entradas y salidas.", "Control de presencia", Enums.NotificationTypeEnum.Info);
 #endif
             });
-    }
+        }
 
-    private void RefreshNotifyIcon()
-    {
-        var leftTimeSpan = new TimeSpan(0, Convert.ToInt32(_leftMins), 0);
-        var colorIconText = Color.Green;
-        _notifyIcon.Icon = Icons.CreateTextIcon(leftTimeSpan.TotalMinutes.ToString(), GetColorIconText(leftTimeSpan));
-        _notifyIcon.Text = String.Format("Tiempo restante {0}", leftTimeSpan.ToString(@"hh\:mm"));
-        if (leftTimeSpan.TotalMinutes < 1)
-            _notification.Show("Ha terminado tu jornada laboral.", "Control de presencia", Enums.NotificationTypeEnum.Info);
-    }
+        private void RefreshNotifyIcon()
+        {
+            if (_presenceControlEntries.Count == 0)
+                return;
+            var leftTimeSpan = new TimeSpan(0, Convert.ToInt32(_leftMins), 0);
+            var colorIconText = Color.Green;
 
-    private Color GetColorIconText(TimeSpan leftTimeSpan)
-    {
-        return leftTimeSpan.TotalMinutes > 60
-            ? Color.Red
-            : Color.Green;
+            if (leftTimeSpan.TotalHours >= 1)
+                _notifyIcon.Icon = Icons.CreateTextIcon(((int)leftTimeSpan.TotalHours).ToString() + "h", Color.Red);
+            else
+                _notifyIcon.Icon = Icons.CreateTextIcon(leftTimeSpan.TotalMinutes.ToString(), Color.Green);
+            _notifyIcon.Text = String.Format("Tiempo restante {0}", leftTimeSpan.ToString(@"hh\:mm"));
+            if (leftTimeSpan.TotalMinutes < 1)
+                _notification.Show("Ha terminado tu jornada laboral.", "Control de presencia", Enums.NotificationTypeEnum.Info);
+        }
     }
-}
 }
