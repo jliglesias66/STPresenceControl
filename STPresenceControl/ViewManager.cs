@@ -31,6 +31,7 @@ namespace STPresenceControl
                 Icon = Properties.Resources.AppIcon,
                 Text = String.Format("Faltan: {0}", new TimeSpan(0, Convert.ToInt32(_leftMins), 0).ToString()),
                 Visible = true,
+                ContextMenu = GenerateContextMenu()
             };
             _notification = new NotifyIconBallonTip(_notifyIcon);
             _notification.Show("Iniciando...", "Control de presencia", Enums.NotificationTypeEnum.Info);
@@ -44,6 +45,25 @@ namespace STPresenceControl
             _refreshData = new DispatcherTimer(new TimeSpan(0, 30, 0), DispatcherPriority.Normal, (sender, e) => GetPrensenceControlEntries(), Dispatcher.CurrentDispatcher);
 
             GetPrensenceControlEntries();
+        }
+
+        private ContextMenu GenerateContextMenu()
+        {
+            var contextMenu = new ContextMenu();
+            //contextMenu.MenuItems.Add("Info", ExecuteShowInfo);
+            //contextMenu.MenuItems.Add("-");
+            contextMenu.MenuItems.Add("Salir", ExecuteExit);
+            return contextMenu;
+        }
+
+        //private void ExecuteShowInfo(object sender, EventArgs e)
+        //{
+        //    MessageBox.Show("Test");
+        //}
+
+        private void ExecuteExit(object sender, EventArgs e)
+        {
+            App.Current.Shutdown();
         }
 
         private void GetPrensenceControlEntries()
