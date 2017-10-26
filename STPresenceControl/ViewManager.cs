@@ -75,7 +75,7 @@ namespace STPresenceControl
                 _leftMins = PresenceControlEntriesHelper.GetLeftTimeMinutes(_presenceControlEntries);
                 RefreshNotifyIcon();
 #if DEBUG
-                _notification.Show("Actualizas entradas y salidas.", "Control de presencia", Enums.NotificationTypeEnum.Info);
+                _notification.Show("Actualizados registros de fichajes", "Control de presencia", Enums.NotificationTypeEnum.Info);
 #endif
             });
         }
