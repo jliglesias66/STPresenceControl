@@ -50,16 +50,16 @@ namespace STPresenceControl
         private ContextMenu GenerateContextMenu()
         {
             var contextMenu = new ContextMenu();
-            //contextMenu.MenuItems.Add("Info", ExecuteShowInfo);
-            //contextMenu.MenuItems.Add("-");
+            contextMenu.MenuItems.Add("Info", ExecuteShowInfo);
+            contextMenu.MenuItems.Add("-");
             contextMenu.MenuItems.Add("Salir", ExecuteExit);
             return contextMenu;
         }
 
-        //private void ExecuteShowInfo(object sender, EventArgs e)
-        //{
-        //    MessageBox.Show("Test");
-        //}
+        private void ExecuteShowInfo(object sender, EventArgs e)
+        {
+            MessageBox.Show("Test");
+        }
 
         private void ExecuteExit(object sender, EventArgs e)
         {
@@ -75,7 +75,7 @@ namespace STPresenceControl
                 _leftMins = PresenceControlEntriesHelper.GetLeftTimeMinutes(_presenceControlEntries);
                 RefreshNotifyIcon();
 #if DEBUG
-                _notification.Show("Actualizas entradas y salidas.", "Control de presencia", Enums.NotificationTypeEnum.Info);
+                _notification.Show("Actualizadas entradas y salidas.", "Control de presencia", Enums.NotificationTypeEnum.Info);
 #endif
             });
         }
