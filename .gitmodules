@@ -1,0 +1,3 @@
+[submodule "SugaarSoft.MVVM"]
+	path = SugaarSoft.MVVM
+	url = https://github.com/Narendil/SugaarSoft.MVVM

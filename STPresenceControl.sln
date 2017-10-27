@@ -1,9 +1,11 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
-VisualStudioVersion = 15.0.27004.2002
+VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STPresenceControl", "STPresenceControl\STPresenceControl.csproj", "{635A5B99-9B72-46C2-94B7-D01888CD234C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SugaarSoft.MVVM", "..\SugaarSoft.MVVM\SugaarSoft.MVVM\SugaarSoft.MVVM.csproj", "{FB1624B7-4781-4FC2-9265-F2BF871DB30C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,20 +17,15 @@ Global
 		{635A5B99-9B72-46C2-94B7-D01888CD234C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{635A5B99-9B72-46C2-94B7-D01888CD234C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{635A5B99-9B72-46C2-94B7-D01888CD234C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FB1624B7-4781-4FC2-9265-F2BF871DB30C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FB1624B7-4781-4FC2-9265-F2BF871DB30C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FB1624B7-4781-4FC2-9265-F2BF871DB30C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FB1624B7-4781-4FC2-9265-F2BF871DB30C}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {E517AA83-E590-4006-BDCC-0E0695161811}
-	EndGlobalSection
-	GlobalSection(TeamFoundationVersionControl) = preSolution
-		SccNumberOfProjects = 2
-		SccEnterpriseProvider = {4CA58AB2-18FA-4F8D-95D4-32DDF27D184C}
-		SccTeamFoundationServer = https://pepeluland.visualstudio.com/
-		SccLocalPath0 = .
-		SccProjectUniqueName1 = STPresenceControl\\STPresenceControl.csproj
-		SccProjectName1 = STPresenceControl
-		SccLocalPath1 = STPresenceControl
 	EndGlobalSection
 EndGlobal
