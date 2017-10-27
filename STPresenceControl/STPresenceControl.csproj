@@ -156,12 +156,6 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\..\SugaarSoft.MVVM\SugaarSoft.MVVM\SugaarSoft.MVVM.csproj">
-      <Project>{fb1624b7-4781-4fc2-9265-f2bf871db30c}</Project>
-      <Name>SugaarSoft.MVVM</Name>
-    </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
     <Page Include="Themes\Resources.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -170,6 +164,12 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SugaarSoft.MVVM\SugaarSoft.MVVM\SugaarSoft.MVVM.csproj">
+      <Project>{fb1624b7-4781-4fc2-9265-f2bf871db30c}</Project>
+      <Name>SugaarSoft.MVVM</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

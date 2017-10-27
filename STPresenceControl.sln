@@ -5,7 +5,7 @@ VisualStudioVersion = 15.0.26730.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "STPresenceControl", "STPresenceControl\STPresenceControl.csproj", "{635A5B99-9B72-46C2-94B7-D01888CD234C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SugaarSoft.MVVM", "..\SugaarSoft.MVVM\SugaarSoft.MVVM\SugaarSoft.MVVM.csproj", "{FB1624B7-4781-4FC2-9265-F2BF871DB30C}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SugaarSoft.MVVM", "SugaarSoft.MVVM\SugaarSoft.MVVM\SugaarSoft.MVVM.csproj", "{FB1624B7-4781-4FC2-9265-F2BF871DB30C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

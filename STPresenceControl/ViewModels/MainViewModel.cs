@@ -15,7 +15,7 @@ namespace STPresenceControl.ViewModels
         public ICommand SelectedSection
         {
             get { return _selectedSection; }
-            set { SetValue(ref _selectedSection, value); }
+            set { _selectedSection = value; OnPropertyChanged(); }
         }
 
         #endregion
