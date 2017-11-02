@@ -8,6 +8,13 @@ namespace STPresenceControl
     /// </summary>
     public partial class App : System.Windows.Application
     {
+        #region Const
+
+        public const string CN_UserName = "UserName";
+        public const string CN_Pwd = "Pwd";
+
+        #endregion
+
         protected override void OnStartup(StartupEventArgs e)
         {
             // Use the assembly GUID as the name of the mutex which we use to detect if an application instance is already running
@@ -21,11 +28,11 @@ namespace STPresenceControl
                     return;
                 }
                 StartUpSTApplication();
-                
+
                 base.OnStartup(e);
             }
         }
-        
+
         private void StartUpSTApplication()
         {
             var viewManager = new ViewManager();

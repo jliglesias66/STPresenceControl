@@ -4,6 +4,7 @@ using STPresenceControl.Models;
 using STPresenceControl.Notification;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.Threading.Tasks;
 using System.Windows.Threading;
@@ -37,7 +38,8 @@ namespace STPresenceControl
             _leftTimeTimer = new DispatcherTimer(
                    new TimeSpan(0, 1, 0),
                    DispatcherPriority.Normal,
-                   (sender, e) => {
+                   (sender, e) =>
+                   {
                        RefreshNotifyIcon();
                        _leftMins--;
                    },
@@ -48,7 +50,8 @@ namespace STPresenceControl
             _refreshData = new DispatcherTimer(
                    new TimeSpan(0, 30, 0),
                    DispatcherPriority.Normal,
-                   (sender, e) => {
+                   (sender, e) =>
+                   {
                        GetPrensenceControlEntries();
                    },
                    Dispatcher.CurrentDispatcher);
@@ -60,7 +63,7 @@ namespace STPresenceControl
         {
             Task.Run(async () =>
             {
-                await _dataProvider.LoginAsync("xxxxx", "xxxxx");
+                await _dataProvider.LoginAsync(ConfigurationManager.AppSettings[App.CN_UserName], ConfigurationManager.AppSettings[App.CN_Pwd]);
                 _presenceControlEntries = await _dataProvider.GetPrensenceControlEntriesAsync(DateTime.Today);
                 _leftMins = PresenceControlEntriesHelper.GetLeftTimeMinutes(_presenceControlEntries);
                 RefreshNotifyIcon();
@@ -73,7 +76,7 @@ namespace STPresenceControl
         private void RefreshNotifyIcon()
         {
             var leftTimeSpan = new TimeSpan(0, Convert.ToInt32(_leftMins), 0);
-            
+
             var colorIconText = Color.Green;
             var showIconAsText = false;
             var toolTipText = "Faltan {0}";

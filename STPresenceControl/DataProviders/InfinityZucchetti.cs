@@ -11,6 +11,7 @@ using System.Net.Http;
 using System.Globalization;
 using Newtonsoft.Json.Linq;
 using STPresenceControl.Enums;
+using System.Net;
 
 namespace STPresenceControl.DataProviders
 {
@@ -28,8 +29,8 @@ namespace STPresenceControl.DataProviders
             var result = await _http.PostAsync(
                     new Uri("https://saas.hrzucchetti.it/hrpsolmicro/servlet/cp_login"),
                     new StringContent(String.Format("m_cUserName={0}&m_cPassword={1}&w_Modal=N&wSHOWSENDMYPWD=true&mylink=M&m_cFailedLoginReason=&ssotrust=&GWINLOGON=&g_codute=0.0&m_cAction=login&m_cURL=&m_cURLOnError=jsp%2Flogin.jsp&error=0&m_cForceLogin=&w_FirstCodAzi=001&g_UserCode=-1&g_UserName=&ssoStatus=0&m_cInstance=&m_cCaptcha=&g_codazi=001&Nodes=t&memo=%2C&TITOLO=f&GLOGOLGINURL=..%2Floghi%2Flogin_solmicro.png&ERM_GANVERATT=070500&mylang=&browserlang=&GLOGOLOGIN=&g_UserLang=&GLANGUAGEINSTALL=%3BDEU%7Cdeutsch%7C..%2Fimages%2Fflag%2FGermany.png%3BENG%7CEnglish%7C..%2Fimages%2Fflag%2FUnitedKingdom.png%3BFRA%7Cfrancais%7C..%2Fimages%2Fflag%2FFrance.png%3BITA%7CItaliano%7C..%2Fimages%2Fflag%2FItaly.png%3BPOR%7Cportuguese%7C..%2Fimages%2Fflag%2FPortugal.png%3BRON%7Cromanian%7C..%2Fimages%2Fflag%2Fdefault.png%3BSPA%7CEspa%C3%B1ol%7C..%2Fimages%2Fflag%2FSpain.png&GFLSENDMYPWD=S&GERMNAME=HRPortal&GLOGINTITLECO=&GIDLANGUAGE=ITA",
-                                        username, password),
-                                    Encoding.UTF8,
+                                        WebUtility.UrlEncode(username), WebUtility.UrlEncode(password)),
+                                    Encoding.ASCII,
                                     "application/x-www-form-urlencoded")
                     );
 
