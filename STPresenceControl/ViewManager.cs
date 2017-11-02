@@ -28,12 +28,16 @@ namespace STPresenceControl
 
         #region Fields
 
+        private static ViewManager _instance;
+
         private double _leftMins;
         private readonly NotifyIcon _notifyIcon;
         private readonly INotfication _notification;
+        private readonly Window _configurationWindow;
         private readonly IDataProvider _dataProvider = new InfinityZucchetti();
-        private DispatcherTimer _refreshData;
-        private DispatcherTimer _leftTimeTimer;
+
+        private readonly DispatcherTimer _refreshData;
+        private readonly DispatcherTimer _leftTimeTimer;
 
         #endregion
 
@@ -45,8 +49,6 @@ namespace STPresenceControl
         #endregion
 
         #region Public
-
-        private static ViewManager _instance;
 
         public static void Start()
         {
@@ -98,10 +100,7 @@ namespace STPresenceControl
 
         private void ExecuteShowConfig(object sender, EventArgs e)
         {
-            var window = new Window();
-            window.Content = new MainViewModel();
-            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
-            window.ShowDialog();
+            _configurationWindow.Show();
         }
 
         private void ExecuteExit(object sender, EventArgs e)
@@ -111,10 +110,11 @@ namespace STPresenceControl
 
         #endregion
 
-        #region Private
+        #region Ctor
 
         private ViewManager()
         {
+            _configurationWindow = GenerateConfigurationWindow();
             _notifyIcon = new NotifyIcon(new Container())
             {
                 ContextMenuStrip = new ContextMenuStrip(),
@@ -135,6 +135,10 @@ namespace STPresenceControl
                    Dispatcher.CurrentDispatcher);
             GetPrensenceControlEntries();
         }
+
+        #endregion
+
+        #region Private
 
         private async void GetPrensenceControlEntries()
         {
@@ -167,6 +171,22 @@ namespace STPresenceControl
             _notifyIcon.Text = String.Format("Tiempo restante {0}", leftTimeSpan.ToString(@"hh\:mm"));
             if (leftTimeSpan.TotalMinutes < 1)
                 _notification.Show("Ha terminado tu jornada laboral.", "Control de presencia", Enums.NotificationTypeEnum.Info);
+        }
+
+        private Window GenerateConfigurationWindow()
+        {
+            var window = new Window();
+            window.Closing += OnConfigWindowClosing;
+            window.Content = new MainViewModel();
+            window.WindowStartupLocation = WindowStartupLocation.CenterScreen;
+            return window;
+        }
+
+        private void OnConfigWindowClosing(object sender, CancelEventArgs e)
+        {
+            e.Cancel = true;
+            var window = (Window)sender;
+            window.Hide();
         }
 
         #endregion
