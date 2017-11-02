@@ -68,6 +68,7 @@
       <HintPath>..\packages\Newtonsoft.Json.10.0.3\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Web" />
@@ -97,6 +98,7 @@
     <Compile Include="Common\Http.cs" />
     <Compile Include="Common\Icons.cs" />
     <Compile Include="Common\PresenceControlEntriesHelper.cs" />
+    <Compile Include="Common\RegistryServiceHelper.cs" />
     <Compile Include="DataProviders\IDataProvider.cs" />
     <Compile Include="DataProviders\InfinityZucchetti.cs" />
     <Compile Include="Enums\PresenceControlEntryTypeEnum.cs" />
@@ -106,6 +108,10 @@
     <Compile Include="Enums\NotificationTypeEnum.cs" />
     <Compile Include="Notification\NotifyIconBallonTip.cs" />
     <Compile Include="ViewManager.cs" />
+    <Compile Include="ViewModels\MainViewModel.cs" />
+    <Compile Include="Views\MainView.xaml.cs">
+      <DependentUpon>MainView.xaml</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -150,8 +156,20 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="ViewModels\" />
-    <Folder Include="Views\" />
+    <Page Include="Themes\Resources.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\MainView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\SugaarSoft.MVVM\SugaarSoft.MVVM\SugaarSoft.MVVM.csproj">
+      <Project>{fb1624b7-4781-4fc2-9265-f2bf871db30c}</Project>
+      <Name>SugaarSoft.MVVM</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
